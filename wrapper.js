@@ -33,7 +33,7 @@ Elm.Native.Html.make = function(elm) {
     }
 
     function eventNode(name, attributes, properties, handlers, contents) {
-        return keyedEventNode(name, null, attributes, properties, List.Nil, contents);	
+        return keyedEventNode(name, null, attributes, properties, handlers, contents);	
     }
 
     function keyedEventNode(name, key, attributes, properties, handlers, contents) {
@@ -298,6 +298,7 @@ Elm.Native.Html.make = function(elm) {
     return Elm.Native.Html.values = {
         node: F4(node),
         keyedNode: F5(keyedNode),
+        keyedEventNode: F6(keyedEventNode),
         eventNode: F5(eventNode),
         text: text,
         on: F2(on),
