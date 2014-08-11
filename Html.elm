@@ -51,6 +51,12 @@ and CSS properties must be set using the JavaScript version of their name, so
 node : String -> [Attribute] -> [CssProperty] -> [Html] -> Html
 node = Native.Html.node
 
+{-| Same as node but associate a key string to this node allowing to accuratly track
+children in an array.
+-}
+keyedNode : String -> String -> [Attribute] -> [CssProperty] -> [Html] -> Html
+keyedNode = Native.Html.keyedNode
+
 {-| Create a DOM node, just like with the `node` function, but you can add event
 listeners. See the `Html.Events` library for more details.
 

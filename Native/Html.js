@@ -1487,10 +1487,17 @@ Elm.Native.Html.make = function(elm) {
     var eq = Elm.Native.Utils.make(elm).eq;
 
     function node(name, attributes, properties, contents) {
-        return eventNode(name, attributes, properties, List.Nil, contents);
+        return keyedEventNode(name, null, attributes, properties, List.Nil, contents);
+    }
+    function keyedNode(name, key, attributes, properties, contents) {
+        return keyedEventNode(name, key, attributes, properties, List.Nil, contents);
     }
 
     function eventNode(name, attributes, properties, handlers, contents) {
+        return keyedEventNode(name, null, attributes, properties, List.Nil, contents);	
+    }
+
+    function keyedEventNode(name, key, attributes, properties, handlers, contents) {
         var attrs = {};
         while (attributes.ctor !== '[]') {
             var attribute = attributes._0;
@@ -1509,7 +1516,7 @@ Elm.Native.Html.make = function(elm) {
             attrs[handler.eventName] = DataSetHook(handler.eventHandler);
             handlers = handlers._1;
         }
-        return new VNode(name, attrs, List.toArray(contents));
+        return new VNode(name, attrs, List.toArray(contents), key);
     }
 
     function pair(key,value) {
@@ -1751,6 +1758,7 @@ Elm.Native.Html.make = function(elm) {
 
     return Elm.Native.Html.values = {
         node: F4(node),
+        keyedNode: F5(keyedNode),
         eventNode: F5(eventNode),
         text: text,
         on: F2(on),
